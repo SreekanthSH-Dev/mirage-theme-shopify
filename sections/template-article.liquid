@@ -1,16 +1,25 @@
 <div class="article-main-container">
-<h1 class="article-title">{{ article.title }}</h1>
-{% if section.settings.enable_author_time %}
-<p class="blog-author">
-    <small>Posted By {{ article.author }} on <time datetime="{{ article.published_at | date: '%Y,%m,%d' }}">{{ article.published_at | date: '%Y-%m-%d' }}</time>
-    </small>
-</p>
-{% endif %}
-<img src="{{ article.image | img_url:'large' }}" width="880px" height="500" loading="lazy" alt="{{article.image.alt}}">
-
-<div class="blog-content">{{ article.content }} </div>
+{% for block in section.blocks %}
+    {%  case block.type %}
+        {%  when 'article_title' %}
+            <h1 class="article-title">{{ article.title }}</h1>
+        {%  when 'article_author' %}
+            {% if section.settings.enable_author_time %}
+            <p class="blog-author">
+                <small>Posted By {{ article.author }} on <time datetime="{{ article.published_at | date: '%Y,%m,%d' }}">{{ article.published_at | date: '%Y-%m-%d' }}</time>
+                </small>
+            </p>
+            {% endif %}
+        {%  when 'article_published_date' %}
+        {%  when 'featured_image' %} 
+            <img src="{{ article.image | img_url:'large' }}" width="880px" height="500" loading="lazy" alt="{{article.image.alt}}">
+        {%  when 'article_content' %}      
+            <div class="blog-content">{{ article.content }} </div>
+        {%  when 'condition' %}
+        {%  else %}
+    {% endcase %}
+{% endfor %}
 </div>
-
 {% schema %}
 {
   "name": "Template Article",
@@ -42,6 +51,10 @@
       "type": "featured_image",
       "name": "Thumbnail",
       "limit": 2
+    },
+    {
+        "type": "article_content",
+        "name" : "article",
     }
   ],
   "presets":[ {
