@@ -1,5 +1,5 @@
-<div class="block-main-container">
 {% paginate blog.articles by 5 %}
+  <div class="block-main-container">
 
 <h1>{{ blog.title }}</h1>
 {% for article in blog.articles %}
@@ -20,5 +20,5 @@
   {{ paginate | default_pagination }}
 {% endif %}
 
-{% endpaginate %}
 </div>
+{% endpaginate %}
