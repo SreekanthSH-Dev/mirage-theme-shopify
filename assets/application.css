@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(251, 251, 232);
+    background-color: rgb(255, 255, 255);
 }
 
 .homepage {
@@ -180,4 +180,12 @@ a.\34 04_home_btn {
     color: white;
     padding: 5px 18px;
     text-decoration: none;
+}
+p span {
+    display: inline-block;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
 }
