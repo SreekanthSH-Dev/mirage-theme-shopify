@@ -1,2 +1,52 @@
-<h1>{{ article.title }}</h1>
-<small>{{ article.author }}</small>
+<div class="article-main-container">
+<h1 class="article-title">{{ article.title }}</h1>
+{% if section.settings.enable_author_time %}
+<p class="blog-author">
+    <small>Posted By {{ article.author }} on <time datetime="{{ article.published_at | date: '%Y,%m,%d' }}">{{ article.published_at | date: '%Y-%m-%d' }}</time>
+    </small>
+</p>
+{% endif %}
+<img src="{{ article.image | img_url:'large' }}" width="880px" height="500" loading="lazy" alt="{{article.image.alt}}">
+
+<div class="blog-content">{{ article.content }} </div>
+</div>
+
+{% schema %}
+{
+  "name": "Template Article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_author_time",
+      "default": true,
+      "label": "Enable to display the author and time"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article_title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "article_author",
+      "name": "Author",
+      "limit": 1
+    },
+    {
+      "type": "article_published_date",
+      "name": "Published date",
+      "limit": 1
+    },
+    {
+      "type": "featured_image",
+      "name": "Thumbnail",
+      "limit": 2
+    }
+  ],
+  "presets":[ {
+    "name": "Default Article Template",
+    "category": "Blog"
+  }]
+}
+{% endschema %}
