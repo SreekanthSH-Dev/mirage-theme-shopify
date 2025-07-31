@@ -19,7 +19,84 @@
         {%  else %}
     {% endcase %}
 {% endfor %}
+<hr>
+{% if blog.comments_enabled? %}
+    <div id='comments-blog'>
+{% if article.comments_count > 0 %}
+  <div class="comments-form-after">
+    <h3>See What Others Are Saying</h3>
+
+    {% paginate article.comments by 12 %}
+      {% for comment in article.comments %}
+        <div class="single-comment">
+          <span class="comment-author">
+            {{ comment.author }}
+          </span>
+          <span class="comment-created">
+            {{ comment.created_at | date: format: 'default' }}
+          </span>
+          <p class="comment-body">
+            {{ comment.content }}
+          </p>
+        </div>
+      {% endfor %}
+
+      <!-- Pagination controls (optional) -->
+      {% if paginate.pages > 1 %}
+        <div class="pagination">
+          {% if paginate.previous %}
+            <a href="{{ paginate.previous.url }}">Previous</a>
+          {% endif %}
+
+          <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+
+          {% if paginate.next %}
+            <a href="{{ paginate.next.url }}">Next</a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% endpaginate %}
+  </div>
+{% endif %}
+
 </div>
+    <div id="comment_form">
+    {% form 'new_comment', article %}
+        {% if form.errors %}
+        <div class="form-errors">
+            {{ form.errors | default_errors }}
+        </div>
+        {% endif %}
+
+        {% if form.posted_successfully? %}
+        <p class="form-success">Thank you for your comment! It will appear once approved.</p>
+        {% endif %}       
+  <div class="form-group-top">
+    <div class="form-group">
+      <label for="comment_author">Name</label>
+      <input type="text" name="comment[author]" id="comment_author" required>
+    </div>
+
+    <div class="form-group">
+      <label for="comment_email">Email</label>
+      <input type="email" name="comment[email]" id="comment_email" required>
+    </div>
+  </div>
+  <div class="form-group-bottom">
+    <div class="form-group full-width">
+      <label for="comment_content">Comment</label>
+      <textarea name="comment[body]" id="comment_content" rows="5" required></textarea>
+    </div>
+  </div>
+
+  <div class="form-group-submit">
+    <button type="submit">Submit Comment</button>
+  </div>
+    {% endform %}
+    </div>
+</div>
+{% endif %}
 {% schema %}
 {
   "name": "Template Article",
