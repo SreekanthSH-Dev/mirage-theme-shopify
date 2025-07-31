@@ -387,3 +387,12 @@ main {
     max-width: 1200px;
     margin: 0 auto;
 }
+.has-children > .submenu {
+  display: none;
+  position: absolute;
+  background: white;
+  padding: 10px;
+}
+.has-children:hover > .submenu {
+  display: block;
+}

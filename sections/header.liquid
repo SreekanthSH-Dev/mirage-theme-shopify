@@ -9,52 +9,48 @@
 <!-- Header Section -->
 <header class="site-header">
   <div class="header-container">
+  
+    <!-- Left: Logo + Menu -->
     <div class="header-container-left">
-    <!-- Logo -->
-    <div class="site-logo">
-      <img src="{{ 'logo.webp' | asset_url }}" height="38px" width="125px" alt="Your image">
+      <!-- Logo -->
+      <div class="site-logo">
+        <img src="{{ 'logo.webp' | asset_url }}" height="38px" width="125px" alt="Site logo">
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="site-nav">
+        <ul class="main-menu">
+          {% for link in section.settings.menu.links %}
+            <li class="menu-item {% if link.links != blank %}has-children{% endif %}">
+              <a href="{{ link.url }}" class="header-btn">{{ link.title }}</a>
+              {% if link.links != blank %}
+                <ul class="submenu">
+                  {% for childlink in link.links %}
+                    <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
     </div>
 
-    <!-- Navigation Menu -->
-    <nav class="site-nav">
-      <ul class="main-menu">
-        {% for link in section.settings.menu.links %}
-            {% if link.links != blank %}
-                <a type="button" href="{{link.url}}" class="header-btn">
-                    {{ link.title }}
-                </a>
-                {% for childlist in link.lists %}
-                    <li><a href="{{ childlist.url }}">{{ childlist.title }}</a></li>
-                {% endfor %}
-            {% else %}
-                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endif %}
-        {% endfor %}
-
-      </ul>
-    </nav>
+    <!-- Right: Icons -->
+    <div class="header-container-right">
+      <div class="header-icons">
+        <div class="currency-selector"><span>EUR | €</span></div>
+        <a href="/pages/faq" class="header-link">FAQ</a>
+        <a href="/pages/about" class="header-link">About</a>
+        <a href="/search" class="icon-button">{% render 'search-icon' %}</a>
+        <a href="{{ routes.account_login_url }}" class="icon-button">{% render 'account-login' %}</a>
+        <a href="{{ routes.cart_url }}" class="icon-button">{% render 'cart-btn' %}</a>
+      </div>
     </div>
-    <div class="header-container-left">
-    <!-- Right Icons -->
-        <div class="header-icons">
-            <div class="currency-selector">
-                <span>EUR | €</span>
-            </div>
-            <a href="/pages/faq" class="header-link">FAQ</a>
-            <a href="/pages/about" class="header-link">About</a>
-            <a href="/search" class="icon-button">
-                {% render 'search-icon' %}
-            </a>
-            <a href="{{routes.account_login_url}}" class="icon-button">
-                {% render 'account-login' %}
-            </a>
-            <a href="{{routes.cart_url}}" class="icon-button">
-                {%  render 'cart-btn' %}
-            </a>
-        </div>
-    </div>
+    
   </div>
 </header>
+
 {% schema %}
 {
   "name": "Header Navigation",
