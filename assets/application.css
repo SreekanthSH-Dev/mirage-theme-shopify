@@ -474,15 +474,7 @@ h2.card-text__title {
     color: white;
     text-align: center;
 }
-.has-children > .submenu {
-  display: none;
-  position: absolute;
-  background: white;
-  padding: 10px;
-}
-.has-children:hover > .submenu {
-  display: flex;
-}
+
 /* Drawer Base Styles */
 .drawer__container {
   position: relative;

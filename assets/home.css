@@ -48,3 +48,19 @@
     background: black !important;
     color: white;
 }
+.has-children > .submenu {
+  display: none;
+  position: absolute;
+  left: 0;
+  background: white;
+  padding: 10px;
+}
+
+.has-children:hover > .submenu {
+    display: grid;
+    margin: 0 80px;
+    grid-template-columns: repeat(5, 1fr);
+}
+.submenu-image-block a img {
+    max-width: 190px !important;
+}
