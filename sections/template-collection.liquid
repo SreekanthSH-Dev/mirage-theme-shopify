@@ -1,0 +1,45 @@
+<div class="collection-page-header">
+    <div class="collection-head-left">
+        <h2 class="collection-head-title">
+            {{collection.title}}
+        </h2>
+            {{collection.description}}
+
+    </div>
+    <div class="collection-head-right">
+       <img src="{{ collection.image | image_url: medium }}" alt="{{ collection.alt_text }}">
+    </div>
+</div>
+<div class="collections">
+  {% paginate collection.products by 5 %}
+    <ul class="collection-grid">
+      {% for product in collection.products %}
+        <li class="collection-item">
+          <a href="{{ product.url }}">
+            <img 
+              src="{{ product.featured_image | image_url: width: 400 }}" 
+              alt="{{ product.title }}" 
+              loading="lazy"
+              width="400" 
+              height="400"
+            >
+            <h3>{{ product.title }}</h3>
+            <p class="price">
+              {% if product.compare_at_price > product.price %}
+                <span class="sale-price">{{ product.price | money }}</span>
+                <span class="compare-price">{{ product.compare_at_price | money }}</span>
+              {% else %}
+                <span>{{ product.price | money }}</span>
+              {% endif %}
+            </p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      {{ paginate | default_pagination }}
+    </div>
+  {% endpaginate %}
+</div>

@@ -462,7 +462,7 @@ button[type="submit"]:hover {
     grid-template-columns: repeat(3, 1fr);
 }
 main {
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
     min-height: 100vh;
 }
