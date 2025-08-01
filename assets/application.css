@@ -122,6 +122,36 @@ body {
     transform: translateX(0%);
   }
 }
+@media screen and (max-width: 767px) {
+  /* Styles for smartphones */
+    nav.site-nav{
+    display: none;
+  }
+  .header-hamburger{
+    display: block !important;
+  }
+  .header-icons{
+    display: none;
+  }
+  .cart-items{
+    max-width: 320px;
+  }
+  .cart-item{
+    flex-direction: column!important;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Styles for tablets */
+  nav.site-nav{
+    display: none;
+  }
+}
+
+.header-hamburger{
+  display: none;
+}
+
+
 
 /* footer */
 .footer__cols {

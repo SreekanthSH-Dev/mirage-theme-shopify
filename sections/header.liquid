@@ -63,6 +63,15 @@
 
     <!-- Right: Icons -->
     <div class="header-container-right">
+      <div class="header-hamburger">
+        <button 
+          class="mobile-menu-btn lg:hidden" 
+          @click="open = !open"
+          aria-label="Toggle Menu"
+        >
+          ☰
+        </button>
+      </div>
       <div class="header-icons">
         <div class="currency-selector"><span>EUR | €</span></div>
         <a href="/pages/faq" class="header-link">FAQ</a>
