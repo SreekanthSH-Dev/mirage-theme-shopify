@@ -62,3 +62,39 @@
     drawer.removeAttribute('open');
   });
 });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileMenuButton = document.querySelector(".mobile-menu-btn");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    // Toggle mobile menu visibility
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener("click", function () {
+        mobileMenu.classList.toggle("open"); // CSS should target this class
+      });
+    }
+
+    // Toggle submenu visibility on click (mobile only)
+    const mobileMenuItems = document.querySelectorAll(".mobile-menu-item.has-children > a");
+
+    mobileMenuItems.forEach((item) => {
+      item.addEventListener("click", function (e) {
+        e.preventDefault();
+        const parent = item.closest(".mobile-menu-item");
+        const submenu = parent.querySelector("ul");
+
+        // Collapse other open submenus
+        document.querySelectorAll(".mobile-menu-item.open").forEach((el) => {
+          if (el !== parent) {
+            el.classList.remove("open");
+            const sub = el.querySelector("ul");
+            if (sub) sub.classList.remove("open");
+          }
+        });
+
+        // Toggle current
+        parent.classList.toggle("open");
+        if (submenu) submenu.classList.toggle("open");
+      });
+    });
+  });

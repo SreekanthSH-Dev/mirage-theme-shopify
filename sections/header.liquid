@@ -8,13 +8,16 @@
 
 <!-- Header Section -->
 <header class="site-header">
-  <div class="header-container">
-  
-    <!-- Left: Logo + Menu -->
+  <div x-data="{ open: false }" class="header-container">
+
+    <!-- Left: Logo + Navigation -->
     <div class="header-container-left">
+      
       <!-- Logo -->
       <div class="site-logo">
-        <img src="{{ 'logo.webp' | asset_url }}" height="38px" width="125px" alt="Site logo">
+        <a href="{{ routes.root_url }}">
+          <img src="{{ 'logo.webp' | asset_url }}" height="38" width="125" alt="{{ shop.name }} logo">
+        </a>
       </div>
 
       <!-- Navigation Menu -->
@@ -24,45 +27,43 @@
             <li class="menu-item {% if link.links != blank %}has-children{% endif %}">
               <a href="{{ link.url }}" class="header-btn">{{ link.title }}</a>
 
-
               {% if link.links != blank %}
+                <ul class="submenu">
+                  {% for childlink in link.links %}
+                    <li>
+                      <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                    </li>
 
-<ul class="submenu">
-  {% for childlink in link.links %}
-    <li>
-      <a href="{{ childlink.url }}">{{ childlink.title }}</a>
-    </li>
+                    {% assign slug = childlink.title | downcase | replace: ' ', '-' %}
 
-    {% assign slug = childlink.title | downcase | replace: ' ', '-' %}
-
-    {% if slug == 'rings' %}
-      <h1>{{  slug }}</h1>
-      {% assign block = shop.metaobjects.submenu_image_block[slug] %}
-      {% if block %}
-
-        <li class="submenu-image-block">
-          <a href="{{ block.link }}">
-            <img src="{{ block.image | image_url: width: 300 }}" alt="{{ block.alt_text }}">
-            <div class="submenu-image-title">{{ block.title }}</div>
-          </a>
-        </li>
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-</ul>
-
-
+                    {% if slug == 'rings' %}
+                      {% assign block = shop.metaobjects.submenu_image_block[slug] %}
+                      {% if block %}
+                        <li class="submenu-image-block">
+                          <a href="{{ block.link }}">
+                            <img src="{{ block.image | image_url: width: 300 }}" alt="{{ block.alt_text }}">
+                            <div class="submenu-image-title">{{ block.title }}</div>
+                          </a>
+                        </li>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </ul>
               {% endif %}
-
-
             </li>
           {% endfor %}
         </ul>
+
+        <!-- Mobile Navigation -->
+
       </nav>
     </div>
 
-    <!-- Right: Icons -->
+
+    <!-- Right: Icons + Mobile Toggle -->
     <div class="header-container-right">
+      
+      <!-- Mobile Hamburger -->
       <div class="header-hamburger">
         <button 
           class="mobile-menu-btn lg:hidden" 
@@ -72,7 +73,9 @@
           ☰
         </button>
       </div>
-      <div class="header-icons">
+
+      <!-- Icons -->
+      <div class="header-icons hidden lg:flex items-center gap-3">
         <div class="currency-selector"><span>EUR | €</span></div>
         <a href="/pages/faq" class="header-link">FAQ</a>
         <a href="/pages/about" class="header-link">About</a>
@@ -80,11 +83,54 @@
         <a href="{{ routes.account_login_url }}" class="icon-button">{% render 'account-login' %}</a>
         <a href="{{ routes.cart_url }}" class="icon-button">{% render 'cart-btn' %}</a>
       </div>
+
     </div>
-    
   </div>
+      <div class="mobile-menu-div">
+
+    <ul class="mobile-menu" x-show="open" x-transition>
+          {% for link in section.settings.menu.links %}
+            <li class="mobile-menu-item {% if link.links != blank %}has-children{% endif %}">
+              <a href="{{ link.url }}" class="block py-2 px-4 border-b">{{ link.title }}</a>
+              {% if link.links != blank %}
+                <ul class="pl-4">
+                  {% for childlink in link.links %}
+                    <li>
+                      <a href="{{ childlink.url }}" class="block py-1 px-4 text-sm text-gray-600">
+                        {{ childlink.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
 </header>
 
+<style>
+  /* Style for toggled menu */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+  }
+
+  .mobile-menu.active {
+    display: flex;
+  }
+
+  .mobile-menu-item.has-children ul {
+    display: none;
+  }
+
+  .mobile-menu-item.open ul {
+    display: block;
+  }
+</style>
+
+<!-- Theme Editor Schema -->
 {% schema %}
 {
   "name": "Header Navigation",

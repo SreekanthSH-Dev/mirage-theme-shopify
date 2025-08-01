@@ -146,6 +146,43 @@ body {
     display: none;
   }
 }
+/* Responsive visibility */
+@media screen and (min-width: 1024px) {
+  .lg\\:hidden { display: none !important; }
+  .lg\\:block { display: block !important; }
+}
+.mobile-menu-div {
+    position: absolute;
+    z-index: 999;
+    top: 130px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+}
+
+/* Basic mobile styling */
+.mobile-menu-btn {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.mobile-menu {
+  display: none;
+}
+.mobile-menu.open {
+    display: block;
+    text-decoration: none !important;
+    list-style: none;
+}
+
+.mobile-menu-item ul {
+  display: none;
+}
+.mobile-menu-item.open > ul {
+  display: block;
+}
 
 .header-hamburger{
   display: none;
