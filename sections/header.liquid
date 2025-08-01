@@ -34,12 +34,18 @@
                     {% assign block = shop.metaobjects.submenu_image_block[slug] %}
 
                     {% if block and block.menu_image %}
-                      <li class="submenu-image-block">
-                        <a href="{{ childlink.link }}">
-                          <img src="{{ block.menu_image | image_url: width: 190 }}" height="240" alt="{{ block.alt_text }}">
-                          <div class="submenu-image-title">{{ childlink.title }}</div>
-                        </a>
-                      </li>
+                  <li class="submenu-image-block">
+                    <a href="{{ childlink.url }}">
+                      <div class="submenu-image-wrapper">
+                        <img src="{{ block.menu_image | image_url: width: 190 }}" alt="{{ block.alt_text }}">
+                        <div class="submenu-overlay">
+                          <h3 class="submenu-title">{{ childlink.title }}</h3>
+                          <span class="submenu-explore">Explore</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+
                     {% else %}
                     <li class="submenu-text-link">
                       <a href="{{ childlink.url }}">{{ childlink.title }}</a>

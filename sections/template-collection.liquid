@@ -4,7 +4,6 @@
             {{collection.title}}
         </h2>
             {{collection.description}}
-
     </div>
     <div class="collection-head-right">
        <img src="{{ collection.image | image_url: medium }}" alt="{{ collection.alt_text }}">
@@ -17,11 +16,11 @@
         <li class="collection-item">
           <a href="{{ product.url }}">
             <img 
-              src="{{ product.featured_image | image_url: width: 400 }}" 
+              src="{{ product.featured_image | image_url:medium }}" 
               alt="{{ product.title }}" 
               loading="lazy"
-              width="400" 
-              height="400"
+              width="260" 
+              height="260"
             >
             <h3>{{ product.title }}</h3>
             <p class="price">

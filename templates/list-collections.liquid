@@ -1,17 +1,14 @@
+<div class="group-collections-grid">
 {% for collection in collections %}
-  {% unless collection.handle == 'frontpage' %}
-    {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
-    <a href="{{ collection.url }}">More {{ collection_title }} &rsaquo;</a>
-    {% for product in collection.products limit:5 %}
-      {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
-      <div>
-        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-        {{ product.price | money }}
-        {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-        <a href="{{ product.url | within: collection }}">
-          <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-        </a>
-      </div>
-    {% endfor %}
-  {% endunless %}
+<a href="{{ collection.url }}" class="collection-card">
+  <div class="collection-image-wrapper">
+    <img src="{{ collection.image | img_url: 'large' }}" width="360" height="430" loading="lazy" alt="{{ collection.image.alt }}">
+    <div class="collection-overlay">
+      <h2 class="collection-title">{{ collection.title }}</h2>
+      <span class="collection-explore">Explore</span>
+    </div>
+  </div>
+</a>
+
 {% endfor %}
+</div>
