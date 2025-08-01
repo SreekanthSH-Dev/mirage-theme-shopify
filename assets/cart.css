@@ -1,0 +1,170 @@
+.cart-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.cart-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cart-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.free-shipping {
+  color: #555;
+  font-size: 1rem;
+}
+
+.cart-divider {
+  width: 150px;
+  border: 2px solid #a35429;
+  margin: 1rem auto;
+}
+
+.continue-shopping {
+  display: inline-block;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  text-decoration: underline;
+}
+
+.cart-body {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.cart-items {
+  flex: 2;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-image img {
+  width: 250px;
+  height: auto;
+}
+
+.item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.item-details h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.variant {
+  color: #888;
+  margin: 0.25rem 0;
+}
+
+.price {
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.quantity-controls {
+    display: flex;
+    width: fit-content;
+    border-radius: 25px;
+    border: 1px solid;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-controls button.qty-button {
+    background: transparent;
+    color: #505050;
+    padding: 0;
+}
+.quantity-controls form {
+    margin: 0;
+}
+.qty-button {
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  padding: 0.2rem 0.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.quantity-value {
+  font-size: 1rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+.remove-item {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #a00;
+  text-decoration: underline;
+}
+
+.cart-summary {
+  flex: 1;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.tax-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-btn {
+  display: block;
+  width: 100%;
+  background: #111;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.order-notes summary {
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.order-notes textarea {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.item-details a {
+    color: black;
+    font-weight: 300;
+    text-decoration: none;
+}

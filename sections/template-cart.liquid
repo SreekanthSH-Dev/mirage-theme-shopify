@@ -1,6 +1,75 @@
-{% if cart.item_count>0 %}
-    cart 
+{% if cart.item_count > 0 %}
+  <div class="cart-wrapper">
+    <div class="cart-header">
+      <h2>My Cart</h2>
+      <p class="free-shipping">Congrats! You're qualified for free shipping!</p>
+      <hr class="cart-divider">
+      <a class="continue-shopping" href="{{ routes.all_products_collection_url }}">
+        CONTINUE SHOPPING
+      </a>
+    </div>
+
+    <div class="cart-body">
+      <div class="cart-items">
+        {% for item in cart.items %}
+          <div class="cart-item">
+            <div class="item-image">
+              <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.title }}">
+            </div>
+            <div class="item-details">
+              <a href="{{ item.product.url }}">{{ item.product.title }}</a>
+              {% if item.variant.title != 'Default Title' %}
+                <p class="variant">
+                  {% for option in item.options_with_values %}
+                    {{ option.name }}: {{ option.value }}{% unless forloop.last %} / {% endunless %}
+                  {% endfor %}
+                </p>
+              {% endif %}
+              <p class="price">{{ item.final_line_price | money }}</p>
+
+              <div class="quantity-controls">
+                <form method="post" action="/cart/change">
+                <input type="hidden" name="id" value="{{ item.key }}">
+                <button type="submit" name="quantity" value="{{ item.quantity | minus: 1 }}" class="qty-button">−</button>
+                </form>
+
+                <span class="item-quantity">{{ item.quantity }}</span>
+
+                <form method="post" action="/cart/change">
+                <input type="hidden" name="id" value="{{ item.key }}">
+                <button type="submit" name="quantity" value="{{ item.quantity | plus: 1 }}" class="qty-button">+</button>
+                </form>
+
+              </div>
+
+              <a class="remove-item" href="/cart/change?id={{ item.key }}&quantity=0">Remove</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="cart-summary">
+        <p class="subtotal">
+          <span>Subtotal:</span>
+          <span class="subtotal-price">{{ cart.total_price | money }}</span>
+        </p>
+        <p class="tax-note">
+          Tax included. <a href="/policies/shipping-policy">Shipping</a> calculated at checkout.
+        </p>
+
+        <form method="post" action="/checkout">
+          <button type="submit" class="checkout-btn">Checkout</button>
+        </form>
+
+        <details class="order-notes">
+          <summary>Order notes</summary>
+          <textarea name="note" rows="4">{{ cart.note }}</textarea>
+        </details>
+      </div>
+    </div>
+  </div>
 {% else %}
+
 {% comment %} if the cart is empty {% endcomment %}
  <div class="no-cart-container">
     <h1>Your Cart Is Empty</h1>
