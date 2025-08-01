@@ -23,13 +23,38 @@
           {% for link in section.settings.menu.links %}
             <li class="menu-item {% if link.links != blank %}has-children{% endif %}">
               <a href="{{ link.url }}" class="header-btn">{{ link.title }}</a>
+
+
               {% if link.links != blank %}
-                <ul class="submenu">
-                  {% for childlink in link.links %}
-                    <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
-                  {% endfor %}
-                </ul>
+
+<ul class="submenu">
+  {% for childlink in link.links %}
+    <li>
+      <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+    </li>
+
+    {% assign slug = childlink.title | downcase | replace: ' ', '-' %}
+
+    {% if slug == 'rings' %}
+      <h1>{{  slug }}</h1>
+      {% assign block = shop.metaobjects.submenu_image_block[slug] %}
+      {% if block %}
+
+        <li class="submenu-image-block">
+          <a href="{{ block.link }}">
+            <img src="{{ block.image | image_url: width: 300 }}" alt="{{ block.alt_text }}">
+            <div class="submenu-image-title">{{ block.title }}</div>
+          </a>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</ul>
+
+
               {% endif %}
+
+
             </li>
           {% endfor %}
         </ul>

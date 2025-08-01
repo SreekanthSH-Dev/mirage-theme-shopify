@@ -33,3 +33,32 @@
       });
     });
   });
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+  const drawer = document.getElementById('Country-drawer-footer');
+  const overlay = document.getElementById('drawerOverlay');
+  const closeBtn = drawer.querySelector('.js-btn-close-drawer');
+
+  // Toggle aria-expanded attribute
+  drawer.querySelector('summary').addEventListener('click', function (e) {
+    e.preventDefault();
+    if (drawer.hasAttribute('open')) {
+      drawer.removeAttribute('open');
+      console.log('open')
+    } else {
+      drawer.setAttribute('open', true);
+    }
+  });
+
+  // Close on overlay click
+  overlay.addEventListener('click', function () {
+    drawer.removeAttribute('open');
+  });
+
+  // Close button inside drawer
+  closeBtn.addEventListener('click', function () {
+    console.log('close');
+    drawer.removeAttribute('open');
+  });
+});

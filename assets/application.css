@@ -2,6 +2,7 @@ body {
     background-color: rgb(255, 255, 255);
     max-width: 1440px;
     margin: 0 auto;
+    font-family: lato,sans-serif;
   }
 
 .homepage {
@@ -325,6 +326,7 @@ button[type="submit"]:hover {
 .blog-card {
   border-radius: 8px;
   padding: 1.5rem;
+  text-align: center;
   margin-bottom: 2rem;
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -346,11 +348,20 @@ button[type="submit"]:hover {
 }
 
 .blog-excerpt {
-  max-height: 120px; /* limits content height */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.5rem;
-  position: relative;
+    max-height: 120px;
+    overflow: hidden;
+    max-width: 100%;
+    font-weight: 300 !important;
+    font-size: 17px;
+    font-family: lato;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 28px;
+    white-space: normal;
+    text-overflow: ellipsis;
+    line-height: 1.5rem;
+    position: relative;
 }
 
 .blog-excerpt::after {
@@ -386,6 +397,15 @@ button[type="submit"]:hover {
 main {
     max-width: 1200px;
     margin: 0 auto;
+    min-height: 100vh;
+}
+
+h2.card-text__title {
+    font-size: 35px;
+    font-weight: 400;
+    margin: 50px 0;
+    color: white;
+    text-align: center;
 }
 .has-children > .submenu {
   display: none;
@@ -394,5 +414,86 @@ main {
   padding: 10px;
 }
 .has-children:hover > .submenu {
-  display: block;
+  display: flex;
+}
+/* Drawer Base Styles */
+.drawer__container {
+  position: relative;
+  overflow: hidden;
+}
+
+.drawer__content {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 400px;
+  max-width: 100%;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s ease;
+  z-index: 9999;
+}
+
+/* When open */
+.drawer__container[open] .drawer__content {
+  right: 0;
+}
+
+/* Backdrop Overlay */
+.drawer-overlay {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.drawer__container[open] + .drawer-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+.card-text.blog__card-text {
+    background: rgb(63, 74, 45);
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    margin-top: 23px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    max-width: 100%;
+    overflow: hidden;
+}
+.card-text__content {
+    text-align: center;
+}
+a.button.button--outlined.button--outlined.button--capitalize {
+    background: white;
+    padding: 20px 45px;
+    border-radius: 45px;
+    border: 1px solid black;
+
+    color: black;
+    text-decoration: none;
+    transition: all 0.4s ease-in-out;
+}
+a.button.button--outlined.button--outlined.button--capitalize:hover{
+  background-color: black;
+  color: white;
+}
+.no-cart-container {
+    display: flex
+;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    /* gap: 50px; */
+    align-items: center;
+    align-content: center !important;
 }

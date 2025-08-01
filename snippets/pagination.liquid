@@ -1,0 +1,29 @@
+{% if paginate.pages > 1 %}
+  <div class="blog-pagination">
+    <ul class="pagination-list">
+
+      {% if paginate.previous %}
+        <li class="pagination-prev">
+          <a href="{{ paginate.previous.url }}" class="pagination-button">← Previous</a>
+        </li>
+      {% endif %}
+
+      {% for part in paginate.parts %}
+        <li class="pagination-part {% if part.is_link == false %}active{% endif %}">
+          {% if part.is_link %}
+            <a href="{{ part.url }}">{{ part.title }}</a>
+          {% else %}
+            <span>{{ part.title }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+
+      {% if paginate.next %}
+        <li class="pagination-next">
+          <a href="{{ paginate.next.url }}" class="pagination-button">Next →</a>
+        </li>
+      {% endif %}
+
+    </ul>
+  </div>
+{% endif %}

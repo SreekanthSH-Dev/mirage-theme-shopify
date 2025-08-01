@@ -1,0 +1,9 @@
+{% if cart.item_count>0 %}
+    cart 
+{% else %}
+{% comment %} if the cart is empty {% endcomment %}
+ <div class="no-cart-container">
+    <h1>Your Cart Is Empty</h1>
+    <a href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+ </div>
+{% endif %}

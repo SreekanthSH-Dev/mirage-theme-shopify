@@ -1,0 +1,62 @@
+{% paginate blog.articles by section.settings.number_of_blog_post %}
+  <div class="block-main-container-blog">
+    <h1>{{ blog.title }}</h1>
+<div class="card-container-blog">
+  {% assign number = 2 %}
+  {% for article in blog.articles %}
+    <div class="blog-card">
+      <img src="{{ article.image | img_url:'large' }}" width="360px" height="360px" loading="lazy" alt="{{ article.image.alt }}">
+      <h2 class="blog-title">
+        <a href="{{ article.url }}">{{ article.title }}</a>
+      </h2>
+
+      <div class="blog-excerpt">
+        {% if article.excerpt.size > 0 %}
+          {{ article.excerpt }}
+        {% else %}
+          {{ article.content | strip_html | truncatewords: 15 }}
+        {% endif %}
+      </div>
+      <div class="blog-meta">
+        <span class="blog-author">{{ article.author }}</span> • 
+        <span class="blog-date">{{ article.created_at | date: "%B %d, %Y" }}</span>
+      </div>
+      <div class="blog-read-more">
+        <a href="{{ article.url }}">Read More →</a>
+      </div>
+    </div>
+
+    {% if number == 3 %}
+      <!-- ✅ Custom block after 3rd blog card -->
+<div class="card-text blog__card-text">
+    <div class="card-text__content"><h2 class="card-text__title">Behind the brand: Find out more about the orgins of us</h2>
+<a href="/pages/our-story" class="button button--outlined button--outlined button--capitalize">Read more</a></div>
+  </div>
+    {% endif %}
+
+    {% assign number = number | plus: 1 %}
+  {% endfor %}
+
+{% comment %} pagination {% endcomment %}
+{% render 'pagination', pagination : paginate %}
+
+  </div>
+  </div>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name" : "blog",
+  "settings": [
+    {
+      "type": "range",
+      "id" : "number_of_blog_post",
+      "default" : 8,
+      "label" : "number of blog post",
+      "min": 1,
+      "max": 12
+    }
+  ]
+
+}
+{% endschema %}
