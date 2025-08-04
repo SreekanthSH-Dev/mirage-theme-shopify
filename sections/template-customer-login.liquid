@@ -1,0 +1,92 @@
+<div class="home-page-header">
+  <div class="home-head-left">
+    {% if settings.home_image != blank %}
+      <img src="{{ settings.home_image | image_url: width: 1600 }}" alt="Home Image">
+    {% else %}
+      <img src="{{ 'home-page-img.webp' | asset_url }}" alt="Default Home Image">
+    {% endif %}
+  </div>
+
+  <div class="custom-login">
+    <div class="login-small-container">
+      <!-- Login Form -->
+      <div id="login-form">
+        <h1 class="login-title">Welcome Back!</h1>
+
+        {% form 'customer_login' %}
+          {% if form.errors %}
+            <div class="errors">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <label for="CustomerEmail">Email</label>
+          <input type="email" name="customer[email]" placeholder="Enter Your Email" id="CustomerEmail" required>
+
+          <label for="CustomerPassword">Password</label>
+          <input type="password" name="customer[password]" placeholder="Enter Your Password" id="CustomerPassword" required>
+
+          <button type="submit">Login</button>
+        {% endform %}
+
+        <p>
+          <a href="#" class="login-link" id="show-recover">Forgot password?</a> 
+        </p>
+        <hr>
+        <div class="form-customer__callout">
+        <h2 class="form-customer__callout-title h3">Don’t have an account yet?</h2>
+        <div>
+            <a href="{{ routes.account_register_url }}"class="login-link">Create an account</a>
+        </div>
+    </div>
+      </div>
+
+      <!-- Recover Password Form -->
+      <div id="recover-form" class="login-small-container" style="display: none;">
+        <h1 class="login-title">Enter email below</h1>
+
+
+        {% form 'recover_customer_password' %}
+          {% if form.errors %}
+            <div class="errors">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <label for="RecoverEmail">Email</label>
+          <input type="email" name="email" id="RecoverEmail" placeholder="Enter your email" required>
+
+          <button type="submit">Reset my password</button>
+        {% endform %}
+
+        <p>
+          <a href="#" class="login-link" id="show-login">Back to login</a>
+        </p>
+      </div>
+
+
+  </div>
+  </div>
+</div>
+
+<!-- Toggle Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const showRecover = document.getElementById('show-recover');
+    const showLogin = document.getElementById('show-login');
+    const loginForm = document.getElementById('login-form');
+    const recoverForm = document.getElementById('recover-form');
+
+    showRecover?.addEventListener('click', function (e) {
+      e.preventDefault();
+      loginForm.style.display = 'none';
+      recoverForm.style.display = 'block';
+    });
+
+    showLogin?.addEventListener('click', function (e) {
+      e.preventDefault();
+      loginForm.style.display = 'block';
+      recoverForm.style.display = 'none';
+    });
+  });
+</script>

@@ -1,5 +1,40 @@
-<div class="homepage">
-  <img src="{{ 'weeklyhow-logo.png' | asset_img_url: 'large' }}" class="logo">
-  <h1>Welcome to Shopify Theme Development course!</h1>
-  <p>{% render 'homepage-text' %}</p>
+{% assign all_collection = collections['all-products'] %}
+
+{% if all_collection %}
+<div class="home-page-header">
+  <div class="home-head-left">
+    {% if settings.home_image != blank %}
+      <img src="{{ settings.home_image | image_url: width: 1600 }}" alt="">
+    {% else %}
+      <img src="{{ 'home-page-img.webp' | asset_url }}" alt="">
+    {% endif %}
+  </div>
+
+  <div class="home-head-right">
+    <p>BE WORTHY TO WEAR IT</p>
+    <h2 class="home-head-title">Diamond Rings For Every Finger</h2>
+    <a href="{{ all_collection.url }}">Explore</a>
+  </div>
+
 </div>
+<div class="collection-home">
+  <h2 class="discover-home">Discover our Products</h2>
+</div>
+{% endif %}
+{% schema %}
+{
+  "name": "Image Upload",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "home_image",
+      "label": "Choose an image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Upload"
+    }
+  ]
+}
+{% endschema %}

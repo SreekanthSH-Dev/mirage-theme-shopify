@@ -160,3 +160,14 @@ h2.home-head-title {
     color: white;
     margin: 0;
 }
+.home-head-right p {
+    color: white;
+}
+.collection-home{
+  text-align: center;
+}
+.discover-home{
+  color: black;
+  font-size: 35px;
+  font-weight: 400;
+}
