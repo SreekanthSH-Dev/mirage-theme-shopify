@@ -1,26 +1,53 @@
-<!-- /templates/customers/account.liquid -->
+{% if customer %}
+<div class="customer-account-main">
+  <h1>welcome , {{ customer.name }}</h1>
+  <div class="customer-account-box">
+    <nav class="account-dashboard__nav">
+      <ul class="list-unstyled">
+        <li>
+          <a href="/account" class="h5">Account overview {% render 'right-arrow' %}</a>
+        </li>
+        <li>
+          <a href="/account?view=orders" class="h5">Order history {% render 'right-arrow' %}</a>
+        </li>
+        <li>
+          <a href="/account?view=addresses" class="h5">Address book {% render 'right-arrow' %}</a>
+        </li>
+        <li>
+           <a href="/account/logout" class="logout-btn-account">Logout</a>
+        </li>
+      </ul>
+    </nav>
 
-{% if customer.default_address %}
-  <h2>Address</h2>
-  <p>{{ customer.default_address.address1 }}</p>
-  {% if customer.default_address.address2 != "" %}
-    <p>{{ customer.default_address.address2 }}</p>
-  {% endif %}
-  <p>{{ customer.default_address.city}}, {% if address.province_code %}{{ customer.default_address.province_code }}, {% endif %}{{ customer.default_address.country }}</p>
-  <p>{{ customer.default_address.zip }}</p>
-  <p>{{ customer.default_address.phone }}</p>
-{% endif %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const view = urlParams.get("view");
 
-<div id="customer_orders">
-  <h2>Orders</h2>
-  {% paginate customer.orders by 10 %}
-  {% if customer.orders.size != 0 %}
-    {% for order in customer.orders %}
-      <!-- order details here -->
-    {% endfor %}
-  {% else %}
-    <p>You haven't placed any orders yet.</p>
-  {% endif %}
-  {{ paginate | default_pagination }}
-  {% endpaginate %}
+        if (view === "orders") {
+          document.getElementById("account-orders").style.display = "block";
+        } else if (view === "addresses") {
+          document.getElementById("account-addresses").style.display = "block";
+        } else {
+          document.getElementById("account-overview").style.display = "block";
+          document.getElementById("account-orders").style.display = "block";
+        }
+      });
+    </script>
+
+      <div class="account-dashboard-details">
+        <div id="account-overview" style="display: none;">
+          {% section 'account-overview' %}
+        </div>
+        <div id="account-orders" style="display: none;">
+          {% section 'account-orders' %}
+        </div>
+        <div id="account-addresses" style="display: none;">
+          {% section 'account-addresses' %}
+        </div>
+      </div>
+    </div>
+
+
 </div>
+{% endif %}

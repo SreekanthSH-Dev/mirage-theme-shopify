@@ -86,7 +86,13 @@
         <a href="/pages/faq" class="header-link">FAQ</a>
         <a href="/pages/about" class="header-link">About</a>
         <a href="/search" class="icon-button">{% render 'search-icon' %}</a>
-        <a href="{{ routes.account_login_url }}" class="icon-button">{% render 'account-login' %}</a>
+        <a href="
+          {% if customer %}
+            {{ routes.account_url }}
+           {% else %}
+            {{ routes.account_login_url }}
+          {% endif %}
+           " class="icon-button">{% render 'account-login' %}</a>
         <a href="{{ routes.cart_url }}" class="icon-button">{% render 'cart-btn' %}</a>
       </div>
 
