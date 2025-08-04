@@ -44,3 +44,19 @@ ul.list-unstyled {
     justify-content: space-around;
     width: 60%;
 }
+.account-orders ul {
+    padding: 0;
+}
+.account-orders ul li {
+    display: flex
+;
+margin:  10px 0;
+    border: 1px solid #d8d8d8;
+}
+div#account-orders {
+    width: 100%;
+}
+
+div#account-addresses {
+    width: 100%;
+}

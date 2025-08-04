@@ -2,18 +2,26 @@
   <div class="account-orders">
     <h3>Recent Orders</h3>
     <ul>
-      {% paginate customer.orders by 5 %}
+      {% paginate customer.orders by 3 %}
         {% for order in customer.orders %}
           <li>
-            <strong>Order #{{ order.name }}</strong> – {{ order.created_at | date: "%B %d, %Y" }}<br>
-            Total: {{ order.total_price | money }}<br>
-            Status: {{ order.fulfillment_status | capitalize }}<br>
-            <a href="{{ order.customer_url }}">View order</a>
+            {% if order.line_items.first.image %}
+              <div class="image-list-order">
+                <img src="{{ order.line_items.first.image | img_url:'large' }}" width="100px" height="100px">
+              </div>
+            {% endif %}
+            <div class="order-list-account">
+              <strong>Order #{{ order.name }}</strong> – {{ order.created_at | date: "%B %d, %Y" }}<br>
+              Total: {{ order.total_price | money }}<br>
+              Status: {{ order.fulfillment_status | capitalize }}<br>
+              <a href="{{ order.customer_url }}">View order</a>
+            </div>
           </li>
         {% endfor %}
       {% endpaginate %}
     </ul>
   </div>
 {% else %}
+  {{ customer.orders_count }}
   <p>You have no orders yet.</p>
 {% endif %}

@@ -1,1 +1,17 @@
-addaaaaaaaaaaaa
+  {% if customer.default_address %}
+    <div class="account-address">
+      <h3>Default Address</h3>
+      <p>
+        {{ customer.default_address.name }}<br>
+        {{ customer.default_address.address1 }}<br>
+        {% if customer.default_address.address2 != blank %}
+          {{ customer.default_address.address2 }}<br>
+        {% endif %}
+        {{ customer.default_address.city }}, {{ customer.default_address.province }}<br>
+        {{ customer.default_address.zip }}<br>
+        {{ customer.default_address.country }}
+      </p>
+    </div>
+  {% else %}
+    <p>No address on file.</p>
+  {% endif %}
