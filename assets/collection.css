@@ -117,3 +117,14 @@ li.collection-item {
 ;
     gap: 0;
 }
+.home-head-right a {
+    color: black;
+    text-decoration: auto;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 25px;
+}
+.home-head-right a:hover {
+    color: white;
+    background: black;
+}

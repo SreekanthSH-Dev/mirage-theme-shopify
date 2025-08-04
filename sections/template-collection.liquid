@@ -35,6 +35,22 @@
         </li>
       {% endfor %}
     </ul>
+    {% if collection.title == 'All Products' %}
+<div class="group-collections-grid">
+{% for collection in collections %}
+<a href="{{ collection.url }}" class="collection-card">
+  <div class="collection-image-wrapper">
+    <img src="{{ collection.image | img_url: 'large' }}" width="360" height="430" loading="lazy" alt="{{ collection.image.alt }}">
+    <div class="collection-overlay">
+      <h2 class="collection-title">{{ collection.title }}</h2>
+      <span class="collection-explore">Explore</span>
+    </div>
+  </div>
+</a>
+
+{% endfor %}
+</div>
+    {% endif %}
 
     <!-- Pagination -->
     <div class="pagination">
