@@ -30,14 +30,21 @@
           document.getElementById("account-addresses").style.display = "block";
         } else {
           document.getElementById("account-overview").style.display = "block";
-          document.getElementById("account-orders").style.display = "block";
         }
       });
     </script>
 
       <div class="account-dashboard-details">
         <div id="account-overview" style="display: none;">
-          {% section 'account-overview' %}
+          <h1>Account Details </h1>
+          <div class="box">
+            <div class="account-overview-address">
+              {% section 'account-overview' %}
+            </div>
+            <div id="account-overview-order">
+              {% section 'account-orders' %}
+            </div>
+          </div>
         </div>
         <div id="account-orders" style="display: none;">
           {% section 'account-orders' %}
